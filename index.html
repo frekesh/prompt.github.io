@@ -1,82 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaptrix - Modern Site</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <!-- Animate.css for effects -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <style>
-        /* Basic Reset */
-        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kara Short AI - Prompts</title>
 
-        body {
-            min-height:100vh;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            color:#fff;
-        }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-        .container {
-            text-align:center;
-            backdrop-filter: blur(10px);
-            background: rgba(255,255,255,0.05);
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            animation: fadeInUp 1.5s ease forwards;
-        }
+<style>
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
 
-        h1 {
-            font-size:3rem;
-            margin-bottom:20px;
-        }
+body {
+    min-height:100vh;
+    background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    color:#fff;
+    padding:50px 20px;
+}
 
-        p {
-            font-size:1.2rem;
-            margin-bottom:30px;
-        }
+.container {
+    width:100%;
+    max-width:900px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border-radius:20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    padding:30px;
+    animation: fadeInUp 1.5s ease forwards;
+}
 
-        .btn {
-            padding:15px 30px;
-            border:none;
-            background: linear-gradient(45deg, #ff6ec4, #7873f5);
-            color:#fff;
-            font-weight:600;
-            border-radius:50px;
-            cursor:pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
+h1 {
+    text-align:center;
+    font-size:2.8rem;
+    margin-bottom:10px;
+}
 
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
+p.subtitle {
+    text-align:center;
+    font-size:1.2rem;
+    margin-bottom:30px;
+    color:#ddd;
+}
 
-        /* Fade in animation keyframes */
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(50px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+#promptInput {
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:20px;
+    font-size:1rem;
+}
 
-        /* Responsive */
-        @media(max-width:600px){
-            h1 { font-size:2rem; }
-            p { font-size:1rem; }
-            .container { padding:30px; }
-        }
-    </style>
+#addPromptBtn {
+    padding:15px 30px;
+    border:none;
+    background: linear-gradient(45deg, #ff6ec4, #7873f5);
+    color:#fff;
+    font-weight:600;
+    border-radius:50px;
+    cursor:pointer;
+    transition: all 0.3s ease;
+    width:100%;
+    margin-bottom:20px;
+}
+
+#addPromptBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+#promptsList {
+    list-style:none;
+}
+
+#promptsList li {
+    background: rgba(255,255,255,0.1);
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:10px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    transition: all 0.3s ease;
+}
+
+#promptsList li:hover {
+    transform: scale(1.02);
+    background: rgba(255,255,255,0.15);
+}
+
+.deleteBtn {
+    background: #ff4b2b;
+    border:none;
+    color:#fff;
+    padding:5px 10px;
+    border-radius:8px;
+    cursor:pointer;
+    transition: all 0.3s ease;
+}
+
+.deleteBtn:hover {
+    transform: scale(1.1);
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width:600px){
+    h1 { font-size:2rem; }
+    p.subtitle { font-size:1rem; }
+}
+</style>
 </head>
 <body>
-    <div class="container animate__animated animate__fadeInUp">
-        <h1>Welcome to Gaptrix</h1>
-        <p>Your modern website powered by GitHub Pages.</p>
-        <button class="btn">Get Started</button>
-    </div>
+
+<div class="container">
+    <h1>Kara Short AI</h1>
+    <p class="subtitle">Add and share your AI prompts easily!</p>
+
+    <input type="text" id="promptInput" placeholder="Enter your prompt here...">
+    <button id="addPromptBtn">Add Prompt</button>
+
+    <ul id="promptsList"></ul>
+
+    <p style="text-align:center; margin-top:30px;">
+        <a href="https://www.youtube.com/@karashortai" target="_blank" style="color:#fff; text-decoration:underline;">Visit my YouTube Channel</a>
+    </p>
+</div>
+
+<script>
+// Simple prompt management
+const addBtn = document.getElementById('addPromptBtn');
+const input = document.getElementById('promptInput');
+const list = document.getElementById('promptsList');
+
+addBtn.addEventListener('click', () => {
+    const value = input.value.trim();
+    if(value === '') return;
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+        <span>${value}</span>
+        <button class="deleteBtn">Delete</button>
+    `;
+    list.appendChild(li);
+    input.value = '';
+
+    li.querySelector('.deleteBtn').addEventListener('click', () => {
+        list.removeChild(li);
+    });
+});
+
+// Optional: Press Enter to add prompt
+input.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter') addBtn.click();
+});
+</script>
+
 </body>
 </html>
