@@ -1,38 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kara Short AI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-    body{background:#0e0e0e;color:#fff;line-height:1.6;}
-    header{background:linear-gradient(135deg,#ff416c,#ff4b2b);padding:20px 40px;position:sticky;top:0;z-index:1000;}
-    header h1{font-size:1.8rem;}
-    nav{margin-top:10px;}
-    nav a{margin:0 15px;color:#fff;text-decoration:none;font-weight:500;transition:0.3s;}
-    nav a:hover{color:#ffe082;}
-    section{padding:60px 20px;max-width:1000px;margin:auto;}
-    section h2{font-size:2rem;text-align:center;margin-bottom:30px;}
-    /* Cards grid */
-    .card-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;}
-    .card{background:#1c1c1c;border-radius:15px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.4);transition:transform .3s;}
-    .card:hover{transform:translateY(-6px);}
-    .card img{width:100%;height:180px;object-fit:cover;}
-    .card-content{padding:20px;}
-    .card-content h3{margin-bottom:10px;}
-    .card-content p{color:#ccc;font-size:0.95rem;margin-bottom:15px;}
-    .btn{display:inline-block;padding:10px 20px;border-radius:50px;background:linear-gradient(45deg,#ff6ec4,#7873f5);color:#fff;text-decoration:none;font-weight:600;transition:0.3s;}
-    .btn:hover{opacity:0.9;}
-    /* Messages */
-    .msg-box{background:#1c1c1c;padding:20px;border-radius:10px;margin-bottom:20px;}
-    #messageInput{width:100%;padding:12px;border-radius:8px;border:none;margin-bottom:15px;}
-    #sendMsgBtn{width:100%;padding:12px;border:none;border-radius:8px;background:linear-gradient(45deg,#43cea2,#185a9d);color:#fff;font-weight:600;cursor:pointer;transition:0.3s;}
-    #sendMsgBtn:hover{opacity:0.85;}
-    .message{background:#2a2a2a;padding:12px;border-radius:8px;margin-bottom:10px;color:#eee;}
-    footer{text-align:center;padding:20px;background:#111;margin-top:40px;font-size:0.9rem;}
-    footer a{color:#ff6ec4;text-decoration:none;}
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #0e0e0e; color: #fff; line-height: 1.6; }
+    header {
+      background: linear-gradient(135deg,#ff416c,#ff4b2b);
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 { font-size: 1.8rem; }
+    nav { margin-top: 10px; }
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav a:hover { color: #ffe082; }
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .card-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: 25px;
+    }
+    .card {
+      background: #1c1c1c;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: transform .3s;
+    }
+    .card:hover { transform: translateY(-6px); }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: brightness(75%);
+    }
+    .card-content {
+      padding: 20px;
+    }
+    .card-content h3 {
+      margin-bottom: 10px;
+    }
+    .card-content p {
+      color: #ccc;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: linear-gradient(45deg,#ff6ec4,#7873f5);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .msg-box {
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    #messageInput {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+      resize: vertical;
+      font-size: 1rem;
+    }
+    #sendMsgBtn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(45deg,#43cea2,#185a9d);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    #sendMsgBtn:hover { opacity: 0.85; }
+    .message {
+      background: #2a2a2a;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+    footer a { color: #ff6ec4; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -47,74 +132,94 @@
   </nav>
 </header>
 
-<!-- HOME -->
 <section id="home">
   <h2>Welcome</h2>
-  <p style="text-align:center;max-width:700px;margin:auto;">
-    Welcome to <b>Kara Short AI</b> 🚀 — my creative AI-powered space where I share prompts, tools, and ideas.  
-    This page is linked with my YouTube channel <a href="https://www.youtube.com/@karashortai" target="_blank" style="color:#ffca28;">@karashortai</a>.
+  <p style="text-align: center; max-width: 700px; margin: auto;">
+    Welcome to <strong>Kara Short AI</strong> — your go-to place for creative AI prompts, tools, and more! Visit our YouTube channel <a href="https://www.youtube.com/@karashortai" target="_blank" style="color: #ffca28;">@karashortai</a> for exciting content.
   </p>
 </section>
 
-<!-- PROMPTS -->
 <section id="prompts">
   <h2>AI Prompts</h2>
   <div class="card-list">
+    <!-- Prompt cards with images and links -->
     <div class="card">
-      <img src="https://picsum.photos/600/400?random=11" alt="Prompt 1">
+      <img src="https://picsum.photos/600/400?random=31" alt="Cat vs Dog Prompt">
       <div class="card-content">
-        <h3>YouTube Viral Script</h3>
-        <p>Create a short AI script for YouTube that grabs attention in 30 seconds.</p>
-        <a href="#" class="btn" onclick="copyText('YouTube Viral Script prompt text...')">Copy Prompt</a>
+        <h3>Human Cat vs Human Dog</h3>
+        <p>Creative prompt about a cat-human versus dog-human scenario.</p>
+        <a href="https://tpi.li/HumanCatvsHumanDog" target="_blank" class="btn">View Prompt</a>
       </div>
     </div>
     <div class="card">
-      <img src="https://picsum.photos/600/400?random=12" alt="Prompt 2">
+      <img src="https://picsum.photos/600/400?random=32" alt="Cat Man vs Dog Man">
       <div class="card-content">
-        <h3>Funny Story Idea</h3>
-        <p>Generate a comedy skit with AI where cats and dogs box each other.</p>
-        <a href="#" class="btn" onclick="copyText('Funny Story Idea prompt text...')">Copy Prompt</a>
+        <h3>Cat Man vs Dog Man</h3>
+        <p>Prompt focusing on cat-man and dog-man characters in action.</p>
+        <a href="https://tpi.li/prompt_-_Cat_Man_vs_Dog_Man" target="_blank" class="btn">View Prompt</a>
       </div>
     </div>
     <div class="card">
-      <img src="https://picsum.photos/600/400?random=13" alt="Prompt 3">
+      <img src="https://picsum.photos/600/400?random=33" alt="Donkey Roller Skating Legend">
       <div class="card-content">
-        <h3>TikTok Short Prompt</h3>
-        <p>Design a 15s AI video idea that could go viral on TikTok.</p>
-        <a href="#" class="btn" onclick="copyText('TikTok Short Prompt text...')">Copy Prompt</a>
+        <h3>Donkey Roller Skating Legend</h3>
+        <p>A fun prompt about a legendary roller skating donkey.</p>
+        <a href="https://tpi.li/DonkeyRollerskatingLegend" target="_blank" class="btn">View Prompt</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://picsum.photos/600/400?random=34" alt="BMX Cat Legend">
+      <div class="card-content">
+        <h3>BMX Cat Legend</h3>
+        <p>A prompt about a legendary cat on a BMX bike.</p>
+        <a href="https://tpi.li/BMX_Cat_Legend_prompt" target="_blank" class="btn">View Prompt</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://picsum.photos/600/400?random=35" alt="Skateboarding Cat">
+      <div class="card-content">
+        <h3>Skateboarding Cat</h3>
+        <p>An AI prompt involving a skateboarding cat.</p>
+        <a href="https://tpi.li/SkateboardingCatPrompt" target="_blank" class="btn">View Prompt</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://picsum.photos/600/400?random=36" alt="Animal Skateboarding">
+      <div class="card-content">
+        <h3>Animal Skateboarding</h3>
+        <p>A cool prompt featuring various animals skateboarding.</p>
+        <a href="https://tpi.li/animalskateboarding" target="_blank" class="btn">View Prompt</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TOOLS -->
 <section id="tools">
   <h2>AI Tools</h2>
   <div class="card-list">
     <div class="card">
-      <img src="https://picsum.photos/600/400?random=21" alt="Tool 1">
+      <img src="https://picsum.photos/600/400?random=41" alt="Image Generator">
       <div class="card-content">
-        <h3>Image Generator</h3>
-        <p>Create AI images with prompts and bring imagination to life.</p>
+        <h3>AI Image Generator</h3>
+        <p>Create amazing AI-generated images from prompts.</p>
         <a href="#" class="btn">Try Tool</a>
       </div>
     </div>
     <div class="card">
-      <img src="https://picsum.photos/600/400?random=22" alt="Tool 2">
+      <img src="https://picsum.photos/600/400?random=42" alt="Music Maker">
       <div class="card-content">
-        <h3>Music Maker</h3>
-        <p>Generate short music tracks for your YouTube shorts and TikToks.</p>
+        <h3>AI Music Maker</h3>
+        <p>Generate short music clips perfect for YouTube shorts.</p>
         <a href="#" class="btn">Try Tool</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MESSAGES -->
 <section id="messages">
   <h2>Anonymous Messages</h2>
   <div class="msg-box">
-    <textarea id="messageInput" rows="4" placeholder="Write your anonymous message..."></textarea>
+    <textarea id="messageInput" rows="4" placeholder="Write your message anonymously..."></textarea>
     <button id="sendMsgBtn">Send Message</button>
   </div>
   <div id="messagesList"></div>
@@ -125,39 +230,32 @@
 </footer>
 
 <script>
-/* Copy prompt to clipboard */
-function copyText(text){
-  navigator.clipboard.writeText(text).then(()=>{
-    alert("Prompt copied to clipboard!");
-  });
-}
+  // Anonymous messages storage (local only)
+  const sendBtn = document.getElementById('sendMsgBtn');
+  const input = document.getElementById('messageInput');
+  const list = document.getElementById('messagesList');
+  let messages = JSON.parse(localStorage.getItem('anonMessages')) || [];
 
-/* Anonymous message storage (local only) */
-const sendBtn = document.getElementById('sendMsgBtn');
-const input = document.getElementById('messageInput');
-const list = document.getElementById('messagesList');
-let messages = JSON.parse(localStorage.getItem('anonMessages')) || [];
-
-function renderMessages(){
-  list.innerHTML = '';
-  messages.forEach(msg=>{
-    const div = document.createElement('div');
-    div.classList.add('message');
-    div.textContent = msg;
-    list.appendChild(div);
-  });
-}
-renderMessages();
-
-sendBtn.addEventListener('click', ()=>{
-  const text = input.value.trim();
-  if(text!==''){
-    messages.push(text);
-    localStorage.setItem('anonMessages', JSON.stringify(messages));
-    input.value='';
-    renderMessages();
+  function renderMessages() {
+    list.innerHTML = '';
+    messages.forEach(msg => {
+      const div = document.createElement('div');
+      div.classList.add('message');
+      div.textContent = msg;
+      list.appendChild(div);
+    });
   }
-});
+  renderMessages();
+
+  sendBtn.addEventListener('click', () => {
+    const text = input.value.trim();
+    if (text !== '') {
+      messages.push(text);
+      localStorage.setItem('anonMessages', JSON.stringify(messages));
+      input.value = '';
+      renderMessages();
+    }
+  });
 </script>
 
 </body>
