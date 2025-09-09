@@ -123,19 +123,13 @@
   <div id="messagesList"></div>
 </section>
 
-<section id="video-generator">
-  <h2 style="text-align:center;margin-bottom:16px;">AI Video Generator</h2>
-  <p style="text-align:center;color:#ccc;margin-bottom:24px;">
-    Generate videos using AIMLAPI
-  </p>
-  <div style="background:#1c1c1c;border-radius:14px;padding:16px;">
-    <textarea id="videoPrompt" rows="3" placeholder="Type your video prompt here..." style="width:100%;padding:12px;border-radius:10px;border:none;outline:none;background:#2a2a2a;color:#fff;margin-bottom:10px;"></textarea>
-    <input type="text" id="videoImageUrl" placeholder="Optional image URL for video start" style="width:100%;padding:12px;border-radius:10px;border:none;outline:none;background:#2a2a2a;color:#fff;margin-bottom:10px;">
-    <button id="genVideoBtn" style="width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(45deg,#ff6ec4,#7873f5);color:#fff;font-weight:700;cursor:pointer;">
-      Generate Video
-    </button>
-    <div id="videoOutput" style="margin-top:16px;color:#eee; word-wrap:break-word;"></div>
-  </div>
+<section id="chat-generator">
+  <h2 style="text-align:center;margin-bottom:16px;">AI Chat Generator</h2>
+  <textarea id="chatPrompt" rows="4" placeholder="Ask a question..." style="width:100%;padding:12px;border-radius:10px;border:none;outline:none;background:#2a2a2a;color:#fff;margin-bottom:10px;"></textarea>
+  <button id="chatBtn" style="width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(45deg,#ff6ec4,#7873f5);color:#fff;font-weight:700;cursor:pointer;">
+    Generate Response
+  </button>
+  <pre id="chatOutput" style="background:#111;border-radius:10px;padding:14px;min-height:80px;color:#eee;white-space:pre-wrap;margin-top:16px;"></pre>
 </section>
 
 <footer>
@@ -172,54 +166,46 @@
 </script>
 
 <script>
-  const apiKey = "465a8f6db2cf47a4a76b97ef116c2b1c";
-  const genBtn = document.getElementById('genVideoBtn');
-  const videoOutput = document.getElementById('videoOutput');
+  const apiKey = "465a8f6db2cf47a4a76b97ef116c2b1c"; // your AIMLAPI key
+  const chatBtn = document.getElementById('chatBtn');
+  const chatOutput = document.getElementById('chatOutput');
 
-  genBtn.addEventListener('click', async () => {
-    const prompt = document.getElementById('videoPrompt').value.trim();
-    const imageUrl = document.getElementById('videoImageUrl').value.trim() || "https://via.placeholder.com/512"; // placeholder if empty
+  chatBtn.addEventListener('click', async () => {
+    const prompt = document.getElementById('chatPrompt').value.trim();
+    if (!prompt) return;
 
-    if (!prompt) {
-      alert("Please enter a prompt for the video.");
-      return;
-    }
-
-    genBtn.disabled = true;
-    genBtn.textContent = 'Generating...';
-    videoOutput.textContent = '';
+    chatBtn.disabled = true;
+    chatBtn.textContent = 'Generating…';
+    chatOutput.textContent = '';
 
     try {
-      const response = await fetch('https://api.aimlapi.com/v2/generate/video/google/generation', {
+      const response = await fetch('https://api.aimlapi.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'google/veo-3.0-i2v-fast',
-          prompt: prompt,
-          image_url: imageUrl,
-          seed: 25
+          model: 'gpt-4o-2024-05-13',
+          messages: [
+            { role: 'system', content: 'You are an AI assistant who knows everything.' },
+            { role: 'user', content: prompt }
+          ],
+          temperature: 0.7,
+          max_tokens: 512
         }),
       });
 
       const result = await response.json();
-
-      if (result.error) {
-        videoOutput.textContent = 'Error: ' + result.error;
-      } else if (result.output_url) {
-        videoOutput.innerHTML = `<video controls width="100%"><source src="${result.output_url}" type="video/mp4">Your browser does not support the video tag.</video>`;
-      } else {
-        videoOutput.innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
-      }
+      const message = result?.choices?.[0]?.message?.content || "(no output)";
+      chatOutput.textContent = message;
 
     } catch (err) {
       console.error(err);
-      videoOutput.textContent = 'Failed to generate video. Try again.';
+      chatOutput.textContent = 'Error generating response. Try again.';
     } finally {
-      genBtn.disabled = false;
-      genBtn.textContent = 'Generate Video';
+      chatBtn.disabled = false;
+      chatBtn.textContent = 'Generate Response';
     }
   });
 </script>
