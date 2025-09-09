@@ -3,220 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kara Short AI</title>
+  <title>Kara Short AI | Prompts</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background: #0e0e0e; color: #fff; line-height: 1.6; }
-    header {
-      background: linear-gradient(135deg,#ff416c,#ff4b2b);
-      padding: 20px 40px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    header h1 { font-size: 1.8rem; }
-    nav { margin-top: 10px; }
-    nav a {
-      margin: 0 15px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-    nav a:hover { color: #ffe082; }
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    section h2 {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .card-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      gap: 25px;
-    }
-    .card {
-      background: #1c1c1c;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-      transition: transform .3s;
-    }
-    .card:hover { transform: translateY(-6px); }
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      filter: brightness(75%);
-    }
-    .card-content {
-      padding: 20px;
-    }
-    .card-content h3 {
-      margin-bottom: 10px;
-    }
-    .card-content p {
-      color: #ccc;
-      font-size: 0.95rem;
-      margin-bottom: 15px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 50px;
-      background: linear-gradient(45deg,#ff6ec4,#7873f5);
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .btn:hover { opacity: 0.9; }
-    .msg-box {
-      background: #1c1c1c;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-    #messageInput {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      margin-bottom: 15px;
-      resize: vertical;
-      font-size: 1rem;
-    }
-    #sendMsgBtn {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: linear-gradient(45deg,#43cea2,#185a9d);
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    #sendMsgBtn:hover { opacity: 0.85; }
-    .message {
-      background: #2a2a2a;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      color: #eee;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111;
-      margin-top: 40px;
-      font-size: 0.9rem;
-    }
-    footer a { color: #ff6ec4; text-decoration: none; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+    body { background: linear-gradient(135deg,#ff416c,#ff4b2b); color:#fff; line-height:1.6; }
+    header { text-align:center; padding:25px 20px; }
+    header img { width:120px; height:120px; border-radius:50%; border:3px solid #fff; object-fit:cover; margin-bottom:15px; }
+    header h1 { font-size:1.8rem; margin-bottom:5px; }
+    header p { color:#eee; margin-bottom:20px; }
+
+    nav a { margin:0 15px; color:#fff; text-decoration:none; font-weight:500; transition:0.3s; }
+    nav a:hover { color:#ffe082; }
+
+    section { padding:60px 20px; max-width:1000px; margin:auto; }
+    section h2 { font-size:2rem; text-align:center; margin-bottom:30px; }
+
+    /* Prompt cards */
+    .card-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; }
+    .card { background:#1c1c1c; border-radius:15px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.4); transition:transform .3s; }
+    .card:hover { transform:translateY(-6px); }
+    .card img { width:100%; height:180px; object-fit:cover; filter:brightness(75%); }
+    .card-content { padding:20px; }
+    .card-content h3 { margin-bottom:10px; }
+    .card-content p { color:#ccc; font-size:0.95rem; margin-bottom:15px; }
+    .btn { display:inline-block; padding:10px 20px; border-radius:50px; background:linear-gradient(45deg,#ff6ec4,#7873f5); color:#fff; text-decoration:none; font-weight:600; transition:0.3s; }
+    .btn:hover { opacity:0.9; }
+
+    /* Message board */
+    .msg-box { background:#1c1c1c; padding:20px; border-radius:10px; margin-bottom:20px; }
+    #messageInput { width:100%; padding:12px; border-radius:8px; border:none; margin-bottom:15px; resize:vertical; font-size:1rem; background:#2a2a2a; color:#fff; }
+    #sendMsgBtn { width:100%; padding:12px; border:none; border-radius:8px; background:linear-gradient(45deg,#43cea2,#185a9d); color:#fff; font-weight:600; cursor:pointer; transition:0.3s; }
+    #sendMsgBtn:hover { opacity:0.85; }
+    .message { background:#2a2a2a; padding:12px; border-radius:8px; margin-bottom:10px; color:#eee; }
+
+    /* AI generator */
+    #ai-generator textarea { width:100%; padding:12px; border-radius:10px; border:none; outline:none; background:#2a2a2a; color:#fff; }
+    #ai-generator button { width:100%; padding:12px; border:none; border-radius:10px; background:linear-gradient(45deg,#ff6ec4,#7873f5); color:#fff; font-weight:700; cursor:pointer; margin-top:12px; }
+    #ai-generator button:hover { opacity:0.9; }
+    #ai-generator #aiOutput { margin-top:16px; background:#111; border-radius:10px; padding:14px; min-height:80px; white-space:pre-wrap; color:#eee; }
+
+    footer { text-align:center; padding:20px; background:#111; margin-top:40px; font-size:0.9rem; }
+    footer a { color:#ff6ec4; text-decoration:none; }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Kara Short AI</h1>
+  <img src="logokara.jpg" alt="Kara Short AI Logo">
+  <h1>@karashortai</h1>
+  <p>AI Shorts • Creative Prompts • Fun Ideas</p>
   <nav>
-    <a href="#home">Home</a>
     <a href="#prompts">Prompts</a>
-    <a href="#tools">Tools</a>
     <a href="#messages">Messages</a>
+    <a href="#ai-generator">AI Generator</a>
   </nav>
 </header>
-
-<section id="home">
-  <h2>Welcome</h2>
-  <p style="text-align: center; max-width: 700px; margin: auto;">
-    Welcome to <strong>Kara Short AI</strong> — your go-to place for creative AI prompts, tools, and more! Visit our YouTube channel <a href="https://www.youtube.com/@karashortai" target="_blank" style="color: #ffca28;">@karashortai</a> for exciting content.
-  </p>
-</section>
 
 <section id="prompts">
   <h2>AI Prompts</h2>
   <div class="card-list">
     <div class="card">
-      <a href="https://www.youtube.com/shorts/_aqWnsS37DA" target="_blank">
-        <img src="https://img.youtube.com/vi/_aqWnsS37DA/maxresdefault.jpg" alt="Human Cat vs Human Dog">
-      </a>
+      <img src="https://img.youtube.com/vi/VIDEO_ID_1/maxresdefault.jpg" alt="Human Cat vs Human Dog">
       <div class="card-content">
         <h3>Human Cat vs Human Dog</h3>
-        <p>Creative prompt about a cat-human versus dog-human showdown.</p>
+        <p>Creative prompt about a cat-human versus dog-human scenario.</p>
         <a href="https://tpi.li/HumanCatvsHumanDog" target="_blank" class="btn">View Prompt</a>
       </div>
     </div>
-
     <div class="card">
-      <a href="https://www.youtube.com/shorts/xs-oIEdN1IQ" target="_blank">
-        <img src="https://img.youtube.com/vi/xs-oIEdN1IQ/maxresdefault.jpg" alt="Donkey Roller Skating Legend">
-      </a>
+      <img src="https://img.youtube.com/vi/VIDEO_ID_2/maxresdefault.jpg" alt="Cat Man vs Dog Man">
+      <div class="card-content">
+        <h3>Cat Man vs Dog Man</h3>
+        <p>Prompt focusing on cat-man and dog-man characters in action.</p>
+        <a href="https://tpi.li/prompt_-_Cat_Man_vs_Dog_Man" target="_blank" class="btn">View Prompt</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://img.youtube.com/vi/VIDEO_ID_3/maxresdefault.jpg" alt="Donkey Roller Skating Legend">
       <div class="card-content">
         <h3>Donkey Roller Skating Legend</h3>
-        <p>A fun AI prompt about a legendary roller-skating donkey.</p>
+        <p>A fun prompt about a legendary roller skating donkey.</p>
         <a href="https://tpi.li/DonkeyRollerskatingLegend" target="_blank" class="btn">View Prompt</a>
       </div>
     </div>
-
     <div class="card">
-      <a href="https://www.youtube.com/shorts/Rr3HO-ZpNE4" target="_blank">
-        <img src="https://img.youtube.com/vi/Rr3HO-ZpNE4/maxresdefault.jpg" alt="BMX Cat Legend">
-      </a>
+      <img src="https://img.youtube.com/vi/VIDEO_ID_4/maxresdefault.jpg" alt="BMX Cat Legend">
       <div class="card-content">
         <h3>BMX Cat Legend</h3>
-        <p>A prompt about a legendary cat performing BMX stunts.</p>
+        <p>A prompt about a legendary cat on a BMX bike.</p>
         <a href="https://tpi.li/BMX_Cat_Legend_prompt" target="_blank" class="btn">View Prompt</a>
       </div>
     </div>
-
     <div class="card">
-      <a href="https://www.youtube.com/shorts/6WkDaFtpYZU" target="_blank">
-        <img src="https://img.youtube.com/vi/6WkDaFtpYZU/maxresdefault.jpg" alt="Skateboarding Cat">
-      </a>
+      <img src="https://img.youtube.com/vi/VIDEO_ID_5/maxresdefault.jpg" alt="Skateboarding Cat">
       <div class="card-content">
         <h3>Skateboarding Cat</h3>
-        <p>An AI prompt about a cool skateboarding cat.</p>
+        <p>An AI prompt involving a skateboarding cat.</p>
         <a href="https://tpi.li/SkateboardingCatPrompt" target="_blank" class="btn">View Prompt</a>
       </div>
     </div>
-
     <div class="card">
-      <a href="https://www.youtube.com/shorts/WB6j9nk4aLA" target="_blank">
-        <img src="https://img.youtube.com/vi/WB6j9nk4aLA/maxresdefault.jpg" alt="Animal Skateboarding">
-      </a>
+      <img src="https://img.youtube.com/vi/VIDEO_ID_6/maxresdefault.jpg" alt="Animal Skateboarding">
       <div class="card-content">
         <h3>Animal Skateboarding</h3>
-        <p>A prompt featuring different animals skateboarding together.</p>
+        <p>A cool prompt featuring various animals skateboarding.</p>
         <a href="https://tpi.li/animalskateboarding" target="_blank" class="btn">View Prompt</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section id="tools">
-  <h2>AI Tools</h2>
-  <div class="card-list">
-    <div class="card">
-      <img src="https://picsum.photos/600/400?random=41" alt="Image Generator">
-      <div class="card-content">
-        <h3>AI Image Generator</h3>
-        <p>Create amazing AI-generated images from prompts.</p>
-        <a href="#" class="btn">Try Tool</a>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://picsum.photos/600/400?random=42" alt="Music Maker">
-      <div class="card-content">
-        <h3>AI Music Maker</h3>
-        <p>Generate short music clips perfect for YouTube shorts.</p>
-        <a href="#" class="btn">Try Tool</a>
       </div>
     </div>
   </div>
@@ -231,6 +123,20 @@
   <div id="messagesList"></div>
 </section>
 
+<section id="ai-generator">
+  <h2 style="text-align:center;margin-bottom:16px;">Free AI Generator</h2>
+  <p id="aiStatus" style="text-align:center;color:#ccc;margin-bottom:24px;">Initializing…</p>
+
+  <div style="background:#1c1c1c;border-radius:14px;padding:16px;">
+    <textarea id="aiInput" rows="5" placeholder="Type your prompt here..."></textarea>
+    <button id="genBtn">Generate</button>
+    <div id="aiOutput"></div>
+  </div>
+  <p id="aiNote" style="text-align:center;color:#aaa;font-size:0.9rem;margin-top:10px;">
+    Tip: first load of the model can take a while on slow connections.
+  </p>
+</section>
+
 <footer>
   <p>Made with ❤️ by <a href="https://www.youtube.com/@karashortai" target="_blank">@karashortai</a></p>
 </footer>
@@ -238,7 +144,7 @@
 <script>
   // Anonymous messages storage (local only)
   const sendBtn = document.getElementById('sendMsgBtn');
-  const input = document.getElementById('messageInput');
+  const msgInput = document.getElementById('messageInput');
   const list = document.getElementById('messagesList');
   let messages = JSON.parse(localStorage.getItem('anonMessages')) || [];
 
@@ -254,12 +160,73 @@
   renderMessages();
 
   sendBtn.addEventListener('click', () => {
-    const text = input.value.trim();
+    const text = msgInput.value.trim();
     if (text !== '') {
       messages.push(text);
       localStorage.setItem('anonMessages', JSON.stringify(messages));
-      input.value = '';
+      msgInput.value = '';
       renderMessages();
+    }
+  });
+</script>
+
+<script type="module">
+  // AI Generator (WebLLM)
+  if (!('gpu' in navigator)) {
+    document.getElementById('aiStatus').textContent =
+      'Your browser does not support WebGPU. Please use latest Chrome/Edge on desktop.';
+  } else {
+    document.getElementById('aiStatus').textContent =
+      'Loading AI model (first time can take a few minutes)…';
+  }
+
+  import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
+
+  let engine = null;
+  async function initEngine() {
+    try {
+      const model = "Llama-3-8B-Instruct-q4f16_1-MLC";
+      engine = await CreateMLCEngine(model, { initProgressCallback: (p) => {
+        const s = document.getElementById('aiStatus');
+        if (p && p.text) s.textContent = p.text;
+      }});
+      document.getElementById('aiStatus').textContent = 'Model ready ✅';
+    } catch(e) {
+      document.getElementById('aiStatus').textContent =
+        'Failed to load model. Try desktop browser.';
+      console.error(e);
+    }
+  }
+  initEngine();
+
+  const aiInput = document.getElementById('aiInput');
+  const aiOutput = document.getElementById('aiOutput');
+  const aiBtn = document.getElementById('genBtn');
+
+  aiBtn.addEventListener('click', async () => {
+    const prompt = aiInput.value.trim();
+    if (!prompt || !engine) return;
+
+    aiBtn.disabled = true;
+    aiBtn.textContent = 'Generating…';
+    aiOutput.textContent = '';
+
+    try {
+      const reply = await engine.chat.completions.create({
+        messages: [
+          { role: "system", content: "You are Kara Short AI’s helpful assistant. Keep answers concise and friendly." },
+          { role: "user", content: prompt }
+        ],
+        temperature: 0.7,
+        max_tokens: 512
+      });
+      aiOutput.textContent = reply?.choices?.[0]?.message?.content || '(no output)';
+    } catch(err) {
+      console.error(err);
+      aiOutput.textContent = 'Error while generating. Try again.';
+    } finally {
+      aiBtn.disabled = false;
+      aiBtn.textContent = 'Generate';
     }
   });
 </script>
