@@ -125,15 +125,19 @@
 
 <section id="ai-generator">
   <h2 style="text-align:center;margin-bottom:16px;">Free AI Generator</h2>
-  <p id="aiStatus" style="text-align:center;color:#ccc;margin-bottom:24px;">Initializing…</p>
+  <p id="aiStatus" style="text-align:center;color:#ccc;margin-bottom:24px;">
+    Ready to generate text via Hugging Face API
+  </p>
 
   <div style="background:#1c1c1c;border-radius:14px;padding:16px;">
-    <textarea id="aiInput" rows="5" placeholder="Type your prompt here..."></textarea>
-    <button id="genBtn">Generate</button>
-    <div id="aiOutput"></div>
+    <textarea id="aiInput" rows="5" placeholder="Type your prompt here..." style="width:100%;padding:12px;border-radius:10px;border:none;outline:none;background:#2a2a2a;color:#fff;"></textarea>
+    <button id="genBtn" style="margin-top:12px;width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(45deg,#ff6ec4,#7873f5);color:#fff;font-weight:700;cursor:pointer;">
+      Generate
+    </button>
+    <div id="aiOutput" style="margin-top:16px;background:#111;border-radius:10px;padding:14px;min-height:80px;white-space:pre-wrap;color:#eee;"></div>
   </div>
   <p id="aiNote" style="text-align:center;color:#aaa;font-size:0.9rem;margin-top:10px;">
-    Tip: first load of the model can take a while on slow connections.
+    Using Hugging Face Inference API
   </p>
 </section>
 
@@ -170,34 +174,9 @@
   });
 </script>
 
-<script type="module">
-  // AI Generator (WebLLM)
-  if (!('gpu' in navigator)) {
-    document.getElementById('aiStatus').textContent =
-      'Your browser does not support WebGPU. Please use latest Chrome/Edge on desktop.';
-  } else {
-    document.getElementById('aiStatus').textContent =
-      'Loading AI model (first time can take a few minutes)…';
-  }
-
-  import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
-
-  let engine = null;
-  async function initEngine() {
-    try {
-      const model = "Llama-3-8B-Instruct-q4f16_1-MLC";
-      engine = await CreateMLCEngine(model, { initProgressCallback: (p) => {
-        const s = document.getElementById('aiStatus');
-        if (p && p.text) s.textContent = p.text;
-      }});
-      document.getElementById('aiStatus').textContent = 'Model ready ✅';
-    } catch(e) {
-      document.getElementById('aiStatus').textContent =
-        'Failed to load model. Try desktop browser.';
-      console.error(e);
-    }
-  }
-  initEngine();
+<script>
+  const apiToken = "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";
+  const modelURL = "https://api-inference.huggingface.co/models/gpt2"; // you can change to another model
 
   const aiInput = document.getElementById('aiInput');
   const aiOutput = document.getElementById('aiOutput');
@@ -205,25 +184,34 @@
 
   aiBtn.addEventListener('click', async () => {
     const prompt = aiInput.value.trim();
-    if (!prompt || !engine) return;
+    if (!prompt) return;
 
     aiBtn.disabled = true;
     aiBtn.textContent = 'Generating…';
     aiOutput.textContent = '';
 
     try {
-      const reply = await engine.chat.completions.create({
-        messages: [
-          { role: "system", content: "You are Kara Short AI’s helpful assistant. Keep answers concise and friendly." },
-          { role: "user", content: prompt }
-        ],
-        temperature: 0.7,
-        max_tokens: 512
+      const response = await fetch(modelURL, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${apiToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ inputs: prompt })
       });
-      aiOutput.textContent = reply?.choices?.[0]?.message?.content || '(no output)';
-    } catch(err) {
+
+      const result = await response.json();
+      if (result.error) {
+        aiOutput.textContent = "Error: " + result.error;
+      } else if (Array.isArray(result)) {
+        aiOutput.textContent = result[0].generated_text || "(no output)";
+      } else {
+        aiOutput.textContent = JSON.stringify(result);
+      }
+
+    } catch (err) {
       console.error(err);
-      aiOutput.textContent = 'Error while generating. Try again.';
+      aiOutput.textContent = "Error generating text. Try again.";
     } finally {
       aiBtn.disabled = false;
       aiBtn.textContent = 'Generate';
