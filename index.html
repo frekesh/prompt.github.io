@@ -129,6 +129,8 @@
     Generate videos using AIMLAPI
   </p>
   <div style="background:#1c1c1c;border-radius:14px;padding:16px;">
+    <textarea id="videoPrompt" rows="3" placeholder="Type your video prompt here..." style="width:100%;padding:12px;border-radius:10px;border:none;outline:none;background:#2a2a2a;color:#fff;margin-bottom:10px;"></textarea>
+    <input type="text" id="videoImageUrl" placeholder="Optional image URL for video start" style="width:100%;padding:12px;border-radius:10px;border:none;outline:none;background:#2a2a2a;color:#fff;margin-bottom:10px;">
     <button id="genVideoBtn" style="width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(45deg,#ff6ec4,#7873f5);color:#fff;font-weight:700;cursor:pointer;">
       Generate Video
     </button>
@@ -175,6 +177,14 @@
   const videoOutput = document.getElementById('videoOutput');
 
   genBtn.addEventListener('click', async () => {
+    const prompt = document.getElementById('videoPrompt').value.trim();
+    const imageUrl = document.getElementById('videoImageUrl').value.trim() || "https://via.placeholder.com/512"; // placeholder if empty
+
+    if (!prompt) {
+      alert("Please enter a prompt for the video.");
+      return;
+    }
+
     genBtn.disabled = true;
     genBtn.textContent = 'Generating...';
     videoOutput.textContent = '';
@@ -188,6 +198,8 @@
         },
         body: JSON.stringify({
           model: 'google/veo-3.0-i2v-fast',
+          prompt: prompt,
+          image_url: imageUrl,
           seed: 25
         }),
       });
@@ -196,8 +208,9 @@
 
       if (result.error) {
         videoOutput.textContent = 'Error: ' + result.error;
+      } else if (result.output_url) {
+        videoOutput.innerHTML = `<video controls width="100%"><source src="${result.output_url}" type="video/mp4">Your browser does not support the video tag.</video>`;
       } else {
-        // You can display the returned video URL if the API provides it
         videoOutput.innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
       }
 
